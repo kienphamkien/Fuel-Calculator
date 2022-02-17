@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="ini.css">
+
+    <body>
+
+
+        <div class='container'>
+            <div class='card'>
+                <h1> Complete Profile </h1>
+
+                <div id='msgError'></div>
+
+                <div class="label-float">
+                    <input type="text" id="name" placeholder=" " required>
+                    <label id="labelName" for="name">Full Name</label>
+                </div>
+
+                <div class='label-float'>
+                    <input type='text' id='addre' paceholder='' required>
+                    <label id='userAddre' for='addre'>Address 1</label>
+                </div>
+
+                <div class='label-float'>
+                    <input type='text' id='addre2' paceholder='' required>
+                    <label id='userAddre2' for='addre2'>Address 2</label>
+                </div>
+
+                <div class='label-float'>
+                    <input type='text' id='city' paceholder='' required>
+                    <label id='usercity' for='city'>City</label>
+                </div>
+
+                <body>
+                    <div class="dropdown">
+                        <form action="">
+                            <label for="states">Choose your State:</label>
+                            <select id="states" name="states"></select>
+
+                        </form>
+
+                    </div>
+                    <script src="app.js"></script>
+                </body>
+                <div class='label-float'>
+                    <input type='number' id='zipcode' paceholder='' required>
+                    <label id='userZipcode' for='zipcode'>Zip Code</label>
+                </div>
+
+
+                <div class='justify-center'>
+                    <button onclick='save()'>Save</button>
+                </div>
+
+                <h1 id='logg'> </h1>
+
+                <button onclick='logou()'> Log out </button>
+
+
+
+                <script src="ini.js"></script>
+
+    </body>

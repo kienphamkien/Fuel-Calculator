@@ -1,2 +1,2 @@
-# Fuel-Calculator
-Software Design course project
+# cosc4353
+Group project for Software Design
