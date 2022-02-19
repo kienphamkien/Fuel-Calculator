@@ -6,7 +6,7 @@
 }
 
 body {
-    background-image: url(https://i.imgur.com/XbRg9D7.png);
+    background-image: url('https://img.freepik.com/free-vector/hand-painted-watercolor-pastel-sky-background_23-2148902771.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed
@@ -60,7 +60,7 @@ h1 {
 
 .label-float label {
     color: #0d009c;
-    pointer-event: none;
+    pointer-events: none;
     position: absolute;
     top: 0;
     left: 0;

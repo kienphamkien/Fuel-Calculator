@@ -6,7 +6,7 @@
 }
 
 body {
-    background-color: #272262;
+    background-color: #322b7b;
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed
@@ -59,7 +59,7 @@ h1 {
 
 .label-float label {
     color: #272262;
-    pointer-event: none;
+    pointer-events: none;
     position: absolute;
     top: 0;
     left: 0;
