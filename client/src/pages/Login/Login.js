@@ -10,7 +10,7 @@ export default function Login() {
     }
   }
   document.body.style.backgroundImage =
-    "url('https://img.freepik.com/free-vector/hand-painted-watercolor-pastel-sky-background_23-2148902771.jpg')";
+    "linear-gradient(to right, rgba(161, 140, 209, 0.5), rgba(251, 194, 235, 0.5))";
   return (
     <div className="container mt4">
       <div className="card">

@@ -33,22 +33,34 @@ export default function SignUp() {
   function passValidation() {
     let pass = document.querySelector("#pass");
     let labelPass = document.querySelector("#label-pass");
+
     if (pass.value.length <= 5) {
       labelPass.setAttribute("style", "color: red");
       labelPass.innerHTML = "Password *Insert at least 6 characters";
       pass.setAttribute("style", "border-color: red");
       validPass = false;
     } else {
-      labelPass.setAttribute("style", "color: green");
-      labelPass.innerHTML = "Password";
-      pass.setAttribute("style", "border-color: green");
-      validPass = true;
+      if (
+        validConfirmPass == true &&
+        pass.value != document.querySelector("#confpass").value
+      ) {
+        labelPass.setAttribute("style", "color: red");
+        labelPass.innerHTML = "Password *Passwords do not match";
+        pass.setAttribute("style", "border-color: red");
+        validPass = false;
+      } else {
+        labelPass.setAttribute("style", "color: green");
+        labelPass.innerHTML = "Password";
+        pass.setAttribute("style", "border-color: green");
+        validPass = true;
+      }
     }
   }
 
   function confpassValidation() {
     let confirmPass = document.querySelector("#confpass");
     let labelConfirmPass = document.querySelector("#label-confpass");
+
     if (pass.value != confirmPass.value) {
       labelConfirmPass.setAttribute("style", "color: red");
       labelConfirmPass.innerHTML = "Confirm Password *Passwords do not match";
@@ -62,7 +74,7 @@ export default function SignUp() {
     }
   }
 
-  function SignUp() {
+  function signUp() {
     let msgError = document.querySelector("#msgError");
     let msgSuccess = document.querySelector("#msgSuccess");
     if (validUser && validPass && validConfirmPass) {
@@ -71,18 +83,19 @@ export default function SignUp() {
       msgError.setAttribute("style", "display: none");
       msgError.innerHTML = "";
 
-        setTimeout(() => {
-          window.location.href = "/login";
-        }, 3000);
+      setTimeout(() => {
+        window.location.href = "/login";
+      }, 3000);
     } else {
       msgError.setAttribute("style", "display: block");
       msgError.innerHTML =
-        "<strong>Fill out the form before signing up</strong>";
+        "<strong>Please correctly fill out the form before signing up</strong>";
       msgSuccess.innerHTML = "";
       msgSuccess.setAttribute("style", "display: none");
     }
   }
-  document.body.style.backgroundColor = "pink";
+  document.body.style.background =
+    "linear-gradient(to right, rgba(166, 192, 254, 0.6), rgba(246, 128, 132, 0.6))";
   return (
     <div className="container mt4">
       <div className="card">
@@ -100,7 +113,6 @@ export default function SignUp() {
                 name="Username"
                 autoComplete="username"
                 onKeyUp={userValidation}
-                minLength="5"
                 required
               />
               <label htmlFor="user" id="label-user" className="form-label">
@@ -114,7 +126,6 @@ export default function SignUp() {
                 className="form-control"
                 id="pass"
                 name="Password"
-                // minLength="6"
                 autoComplete="new-password"
                 onKeyUp={passValidation}
                 required
@@ -148,7 +159,7 @@ export default function SignUp() {
               </label>
             </div>
             <div className="justify-center">
-              <button type="button" onClick={SignUp}>
+              <button type="button" onClick={signUp}>
                 Sign Up
               </button>
             </div>
