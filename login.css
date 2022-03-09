@@ -59,7 +59,7 @@ h1 {
 
 .label-float label {
     color: #272262;
-    pointer-event: none;
+    pointer-events: none;
     position: absolute;
     top: 0;
     left: 0;
@@ -90,7 +90,7 @@ button {
 
 button:hover {
     background-color: #272262;
-    color: #fff;
+    color: rgb(255, 255, 255);
 }
 
 .justify-center {
@@ -118,7 +118,7 @@ a {
 }
 
 a:hover {
-    color: #272262;
+    color: #226239;
 }
 
 .fa-eye {

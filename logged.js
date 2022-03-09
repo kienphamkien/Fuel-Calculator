@@ -4,7 +4,7 @@ let loggedIn = document.querySelector('#loggedIn')
 loggedIn.innerHTML = `Olá ${userLogged.nome}`
 
 if (localStorage.getItem('token') == null) {
-    alert('You are not logged to access this page')
+    alert('You are not logged in to access this page')
     window.location.href = 'index.html'
 }
 

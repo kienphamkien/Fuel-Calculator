@@ -136,7 +136,7 @@ function regis() {
     }
 }
 
-function logou() {
+function logout() {
     localStorage.removeItem('token')
     localStorage.removeItem('userLogg')
     window.location.href = 'login.html'

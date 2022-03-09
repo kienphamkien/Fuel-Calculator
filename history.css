@@ -1,4 +1,22 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+
+
+
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 * {
     margin: 0;
     padding: 0;
@@ -24,7 +42,7 @@ body {
     padding: 30px;
     border-radius: 4%;
     box-shadow: 3px 3px 1px 0px #00000060;
-    width: 400px;
+    width: 900px;
 }
 
 h1 {
@@ -56,6 +74,13 @@ h1 {
 
 .label-float input:focus {
     border-bottom: 2px solid #4038a0;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    z-index: 10;
+    padding: 10px;
 }
 
 .label-float label {

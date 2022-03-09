@@ -1,39 +1,38 @@
 <head>
-    <link rel="stylesheet" href="login.css">
+  <link rel="stylesheet" href="login.css" />
 </head>
 
 <body>
+  <div class="container">
+    <div class="card">
+      <h1>Login</h1>
 
-    <div class='container'>
-        <div class='card'>
-            <h1> Login </h1>
+      <div id="msgError"></div>
 
-            <div id='msgError'></div>
+      <div class="label-float">
+        <input type="text" id="user" paceholder="" required />
+        <label id="userLabel" for="user">Username</label>
+      </div>
 
-            <div class='label-float'>
-                <input type='text' id='user' paceholder='' required>
-                <label id='userLabel' for='user'>Username</label>
-            </div>
+      <div class="label-float">
+        <input type="password" id="pass" paceholder="" required />
+        <label id="passLabel" for="pass">Password</label>
+        <i class="fa fa-eye" aria-hidden="true"></i>
+      </div>
 
-            <div class='label-float'>
-                <input type='password' id='pass' paceholder='' required>
-                <label id='passLabel' for='pass'>Password</label>
-                <i class="fa fa-eye" aria-hidden="true"></i>
-            </div>
+      <div class="justify-center">
+        <button onclick="logi()">Login</button>
+      </div>
 
-            <div class='justify-center'>
-                <button onclick='logi()'>Login</button>
-            </div>
+      <div class="justify-center">
+        <hr />
+      </div>
 
-            <div class='justify-center'>
-                <hr>
-            </div>
-
-            <p> Don't have an account?
-                <a href='reg.html'> SignUp </a>
-            </p>
-
-        </div>
+      <p>
+        Don't have an account?
+        <a href="registration.html"> Sign Up </a>
+      </p>
     </div>
-    <script src="login.js"></script>
+  </div>
+  <script src="login.js"></script>
 </body>
