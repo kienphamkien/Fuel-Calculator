@@ -109,7 +109,7 @@ export default function Profile() {
                 name="Zipcode"
                 required
               />
-              <label htmlFor="city" id="label-city" className="form-label">
+              <label htmlFor="zipcode" id="label-zipcode" className="form-label">
                 Zipcode:
               </label>
             </div>

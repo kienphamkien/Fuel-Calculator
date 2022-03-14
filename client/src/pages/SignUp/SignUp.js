@@ -1,6 +1,51 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link, Navigate } from "react-router-dom";
+import { connect } from "react-redux";
+import { signup } from "../../actions/auth";
 // import style from "./SignUp.module.css";
-export default function SignUp() {
+
+const SignUp = ({ signup, isAuthenticated }) => {
+  const [accountCreated, setAccountCreated] = useState(false);
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    password: "",
+    re_password: "",
+  });
+  const { username, email, password, re_password } = formData;
+  const onChange = (e) =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    let msgError = document.querySelector("#msgError");
+    let msgSuccess = document.querySelector("#msgSuccess");
+    if (validUser && validPass && validConfirmPass) {
+      msgSuccess.setAttribute("style", "display: block");
+      msgSuccess.innerHTML = "<strong>Signing Up User...</strong>";
+      msgError.setAttribute("style", "display: none");
+      msgError.innerHTML = "";
+    } else {
+      msgError.setAttribute("style", "display: block");
+      msgError.innerHTML =
+        "<strong>Please correctly fill out the form before signing up</strong>";
+      msgSuccess.innerHTML = "";
+      msgSuccess.setAttribute("style", "display: none");
+    }
+    if (password === re_password) {
+      signup(username, email, password, re_password);
+      setAccountCreated(true);
+    }
+  };
+
+  if (isAuthenticated) {
+    return <Navigate to="/" />;
+  }
+
+  if (accountCreated) {
+    return <Navigate to="/login" />;
+  }
+
   function eyeClick() {
     let pass = document.querySelector("#pass");
     if (pass.type == "password") {
@@ -75,24 +120,20 @@ export default function SignUp() {
   }
 
   function signUp() {
-    let msgError = document.querySelector("#msgError");
-    let msgSuccess = document.querySelector("#msgSuccess");
-    if (validUser && validPass && validConfirmPass) {
-      msgSuccess.setAttribute("style", "display: block");
-      msgSuccess.innerHTML = "<strong>Signing Up User...</strong>";
-      msgError.setAttribute("style", "display: none");
-      msgError.innerHTML = "";
-
-      setTimeout(() => {
-        window.location.href = "/login";
-      }, 3000);
-    } else {
-      msgError.setAttribute("style", "display: block");
-      msgError.innerHTML =
-        "<strong>Please correctly fill out the form before signing up</strong>";
-      msgSuccess.innerHTML = "";
-      msgSuccess.setAttribute("style", "display: none");
-    }
+    // let msgError = document.querySelector("#msgError");
+    // let msgSuccess = document.querySelector("#msgSuccess");
+    // if (validUser && validPass && validConfirmPass) {
+    //   msgSuccess.setAttribute("style", "display: block");
+    //   msgSuccess.innerHTML = "<strong>Signing Up User...</strong>";
+    //   msgError.setAttribute("style", "display: none");
+    //   msgError.innerHTML = "";
+    // } else {
+    //   msgError.setAttribute("style", "display: block");
+    //   msgError.innerHTML =
+    //     "<strong>Please correctly fill out the form before signing up</strong>";
+    //   msgSuccess.innerHTML = "";
+    //   msgSuccess.setAttribute("style", "display: none");
+    // }
   }
   document.body.style.background =
     "linear-gradient(to right, rgba(166, 192, 254, 0.6), rgba(246, 128, 132, 0.6))";
@@ -104,15 +145,17 @@ export default function SignUp() {
         <div id="msgError"></div>
         <div id="msgSuccess"></div>
         <div className="card-body">
-          <form action="/auth/signup" method="POST">
+          <form onSubmit={(e) => onSubmit(e)}>
             <div className="form-group">
               <input
                 type="text"
                 className="form-control"
                 id="user"
-                name="Username"
+                name="username"
                 autoComplete="username"
                 onKeyUp={userValidation}
+                value={username}
+                onChange={(e) => onChange(e)}
                 required
               />
               <label htmlFor="user" id="label-user" className="form-label">
@@ -122,12 +165,31 @@ export default function SignUp() {
 
             <div className="form-group">
               <input
+                type="email"
+                className="form-control"
+                id="email"
+                name="email"
+                autoComplete="email"
+                value={email}
+                onChange={(e) => onChange(e)}
+                required
+              />
+              <label htmlFor="email" id="label-email" className="form-label">
+                Email:
+              </label>
+            </div>
+
+            <div className="form-group">
+              <input
                 type="password"
                 className="form-control"
                 id="pass"
-                name="Password"
+                name="password"
                 autoComplete="new-password"
+                value={password}
                 onKeyUp={passValidation}
+                minLength="6"
+                onChange={(e) => onChange(e)}
                 required
               />
               <label htmlFor="pass" id="label-pass" className="form-label">
@@ -145,9 +207,12 @@ export default function SignUp() {
                 type="password"
                 className="form-control"
                 id="confpass"
-                name="Confirm Password"
+                name="re_password"
                 autoComplete="new-password"
                 onKeyUp={confpassValidation}
+                value={re_password}
+                minLength="6"
+                onChange={(e) => onChange(e)}
                 required
               />
               <label
@@ -159,7 +224,7 @@ export default function SignUp() {
               </label>
             </div>
             <div className="justify-center">
-              <button type="button" onClick={signUp}>
+              <button type="submit" onClick={signUp}>
                 Sign Up
               </button>
             </div>
@@ -174,4 +239,10 @@ export default function SignUp() {
       </div>
     </div>
   );
-}
+};
+
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
+export default connect(mapStateToProps, { signup })(SignUp);

@@ -1,6 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
+import { Navigate } from "react-router-dom";
+import { connect } from "react-redux";
+import { login } from "../../actions/auth";
 // import style from "./Login.module.css";
-export default function Login() {
+
+const Login = ({ login, isAuthenticated }) => {
   function eyeClick() {
     let pass = document.querySelector("#password");
     if (pass.type == "password") {
@@ -9,6 +13,19 @@ export default function Login() {
       pass.setAttribute("type", "password");
     }
   }
+  const [formData, setFormData] = useState({ username: "", password: "" });
+  const { username, password } = formData;
+  const onChange = (e) =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    login(username, password);
+  };
+
+  if (isAuthenticated) {
+    return <Navigate to="/" />;
+  }
   document.body.style.backgroundImage =
     "linear-gradient(to right, rgba(161, 140, 209, 0.5), rgba(251, 194, 235, 0.5))";
   return (
@@ -16,14 +33,16 @@ export default function Login() {
       <div className="card">
         <h1>Login</h1>
         <div className="card-body">
-          <form action="/auth/login" method="POST">
+        <form onSubmit={(e) => onSubmit(e)}>
             <div className="form-group">
               <input
                 type="text"
                 className="form-control"
                 id="username"
-                name="Username"
+                name="username"
+                value={username}
                 autoComplete="username"
+                onChange={(e) => onChange(e)}
                 required
               />
               <label htmlFor="username" className="form-label">
@@ -36,7 +55,10 @@ export default function Login() {
                 type="password"
                 className="form-control"
                 id="password"
-                name="Password"
+                name="password"
+                value={password}
+                minLength="6"
+                onChange={(e) => onChange(e)}
                 autoComplete="current-password"
                 required
               />
@@ -64,4 +86,10 @@ export default function Login() {
       </div>
     </div>
   );
-}
+};
+
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
+export default connect(mapStateToProps, { login })(Login);

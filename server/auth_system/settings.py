@@ -62,12 +62,12 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'auth_system.urls'
-# CORS_ALLOW_ALL_ORIGINS = True
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:8000",
-    "http://127.0.0.1:8000"
-]
-
+CORS_ALLOW_ALL_ORIGINS = True
+# CORS_ALLOWED_ORIGINS = [
+#     "http://localhost:8000",
+#     "http://127.0.0.1:8000"
+# ]
+AUTH_USER_MODEL = 'accounts.useraccount'
 
 TEMPLATES = [
     {
@@ -94,7 +94,7 @@ WSGI_APPLICATION = 'auth_system.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'auth_system',
+        'NAME': 'fuel',
         'USER': 'postgres',
         'PASSWORD' : 'k',
         'HOST': 'localhost',
