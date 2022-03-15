@@ -1,9 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./custom.scss";
-const bootstrap = require("bootstrap");
-const table = require("bootstrap-table");
-
 import Login from "./pages/Login/Login";
 import SignUp from "./pages/SignUp/SignUp";
 import Profile from "./pages/Profile/Profile";
@@ -16,6 +13,8 @@ import Activate from "./pages/Activate";
 import PrivateRoute from "./components/PrivateRoute";
 import { connect } from "react-redux";
 
+const bootstrap = require("bootstrap");
+const table = require("bootstrap-table");
 // function App() {
 //   return (
 //       <Router>
