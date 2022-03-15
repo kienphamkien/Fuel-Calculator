@@ -103,6 +103,7 @@ const SignUp = ({ signup, isAuthenticated }) => {
   }
 
   function confpassValidation() {
+    let pass = document.querySelector("#pass");
     let confirmPass = document.querySelector("#confpass");
     let labelConfirmPass = document.querySelector("#label-confpass");
 
