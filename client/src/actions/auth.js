@@ -79,7 +79,6 @@ export const load_user = () => async (dispatch) => {
   }
 };
 export const login = (username, password) => async (dispatch) => {
-  console.log(process.env.REACT_APP_API_URL)
   const config = {
     headers: {
       "Content-Type": "application/json",
