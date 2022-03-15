@@ -1,31 +1,32 @@
-import React from "react";
+import React, {useEffect} from "react";
+import statesJson from "./states";
 
 export default function Profile() {
-  document.addEventListener("DOMContentLoaded", () => {
-    const selectDrop = document.querySelector("#states");
 
-    fetch("states.json")
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        let output = `<option value="" selected>Choose your state...</option>`;
-        data.forEach((state) => {
-          output += `
+  let data = statesJson["data"];
+  var output = "";
+  output = `<option value="" selected>Choose your state...</option>`;
+  data.forEach((state) => {
+    output += `
         <option value="${state.name}">${state.name}</option>`;
-        });
-        selectDrop.innerHTML = output;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
   });
+  // document.addEventListener("DOMContentLoaded", () => {
+  //   document.querySelector("#states").innerHTML = output;
+  // });
+  useEffect(() => {
+    document.querySelector("#states").innerHTML = output;
+    // document.addEventListener("DOMContentLoaded", () => {
+    //   document.querySelector("#states").innerHTML = output;
+    // });
+  }, []);
 
   const zipcode = document.querySelector("#zipcode");
 
   function submitHandler() {
     if (zipcode.validity.patternMismatch) {
-      zipcode.setCustomValidity("Please enter valid zipcode. Examples: 77433 or 77433-0213");
+      zipcode.setCustomValidity(
+        "Please enter valid zipcode. Examples: 77433 or 77433-0213"
+      );
     } else {
       zipcode.setCustomValidity("");
     }
@@ -94,11 +95,14 @@ export default function Profile() {
             </div>
 
             <div className="form-group">
-            <select className="form-control" id="states" required></select>
+              <select
+                className="form-control states"
+                id="states"
+                required
+              ></select>
               <label className="form-label" htmlFor="states" id="label-states">
                 State:
               </label>
-             
             </div>
             <div className="form-group">
               <input
@@ -109,7 +113,11 @@ export default function Profile() {
                 name="Zipcode"
                 required
               />
-              <label htmlFor="zipcode" id="label-zipcode" className="form-label">
+              <label
+                htmlFor="zipcode"
+                id="label-zipcode"
+                className="form-label"
+              >
                 Zipcode:
               </label>
             </div>

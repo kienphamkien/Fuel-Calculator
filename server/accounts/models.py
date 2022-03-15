@@ -30,7 +30,7 @@ class UserAccount(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELDS = ['email']
 
     def __str__(self):
-        return self.email
+        return self.username
 
 class ClientInformation(models.Model):
     user = models.OneToOneField(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -42,4 +42,4 @@ class ClientInformation(models.Model):
     zipcode= models.CharField(default='',max_length=9, validators=[MinLengthValidator(4)])
 
     def __str__(self):
-        return self.full_name
+        return self.user

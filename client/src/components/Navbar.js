@@ -19,13 +19,19 @@ const Navbar = ({ logout, isAuthenticated }) => {
     </Fragment>
   );
   const authLinks = () => (
-    <li className="nav-item">
-      <a className="nav-link" href="#!" onClick={logout}>
-        Logout
-      </a>
-    </li>
+    <Fragment>
+      <li className="nav-item">
+        <Link className="nav-link" to="/profile">
+          My profile
+        </Link>
+      </li>
+      <li className="nav-item">
+        <a className="nav-link" href="/" onClick={logout}>
+          Logout
+        </a>
+      </li>
+    </Fragment>
   );
-
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -35,11 +41,8 @@ const Navbar = ({ logout, isAuthenticated }) => {
         <button
           className="navbar-toggler"
           type="button"
-          data-toggle="collapse"
-          data-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
         >
           <span className="navbar-toggler-icon"></span>
         </button>
