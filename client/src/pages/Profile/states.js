@@ -1,4 +1,4 @@
-[{
+export default  {"data" :[{
         "name": "Alabama",
         "abbreviation": "AL"
     },
@@ -234,4 +234,4 @@
         "name": "Wyoming",
         "abbreviation": "WY"
     }
-]
+]}

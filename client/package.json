@@ -6,6 +6,7 @@
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.3",
     "@testing-library/user-event": "^13.5.0",
+    "jest":"m.m.b",
     "bootstrap": "^5.1.3",
     "bootstrap-table": "^1.19.1",
     "node-sass": "^7.0.1",
@@ -24,9 +25,11 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "rd /s /q ..\\server\\build && react-scripts build && Xcopy /E /I build ..\\server\\build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --watchAll --testMatch /src//*.test.js",
     "eject": "react-scripts eject"
+
   },
+
   "eslintConfig": {
     "extends": [
       "react-app",
