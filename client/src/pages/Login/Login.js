@@ -26,6 +26,8 @@ const Login = ({ login, isAuthenticated }) => {
   if (isAuthenticated) {
     return <Navigate to="/" />;
   }
+
+  
   document.body.style.backgroundImage =
     "linear-gradient(to right, rgba(161, 140, 209, 0.5), rgba(251, 194, 235, 0.5))";
   return (
