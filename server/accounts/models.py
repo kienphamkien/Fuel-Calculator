@@ -1,3 +1,4 @@
+from multiprocessing.connection import Client
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 from django.core.validators import MinLengthValidator
@@ -15,7 +16,7 @@ class UserAccountManager(BaseUserManager):
 
         user.set_password(password)
         user.save()
-
+        ClientInformation(user_id=user.id).save()
         return user
 
 class UserAccount(AbstractBaseUser, PermissionsMixin):
@@ -42,4 +43,4 @@ class ClientInformation(models.Model):
     zipcode= models.CharField(default='',max_length=9, validators=[MinLengthValidator(4)])
 
     def __str__(self):
-        return self.user
+        return str(self.user)

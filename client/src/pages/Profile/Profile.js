@@ -1,34 +1,64 @@
-import React, {useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import statesJson from "./states";
+import { load_user_profile, update_profile } from "../../actions/profile";
+import { connect } from "react-redux";
 
-export default function Profile() {
+const Profile = ({
+  full_name_global,
+  address1_global,
+  address2_global,
+  city_global,
+  state_global,
+  zipcode_global,
+  update_profile,
+}) => {
+
 
   let data = statesJson["data"];
   var output = "";
   output = `<option value="" selected>Choose your state...</option>`;
   data.forEach((state) => {
     output += `
-        <option value="${state.name}">${state.name}</option>`;
+        <option value="${state.abbreviation}">${state.name}</option>`;
   });
-  // document.addEventListener("DOMContentLoaded", () => {
-  //   document.querySelector("#states").innerHTML = output;
-  // });
+
+  const [formData, setFormData] = useState({
+    full_name: "",
+    address1: "",
+    address2: "",
+    city: "",
+    state: "",
+    zipcode: "",
+  });
+
+  const { full_name, address1, address2, city, state, zipcode } = formData;
+
   useEffect(() => {
     document.querySelector("#states").innerHTML = output;
-    // document.addEventListener("DOMContentLoaded", () => {
-    //   document.querySelector("#states").innerHTML = output;
-    // });
-  }, []);
+    setFormData({
+      full_name: full_name_global,
+      address1: address1_global,
+      address2: address2_global,
+      city: city_global,
+      state: state_global,
+      zipcode: zipcode_global,
+    });
+  }, [full_name_global]);
 
-  const zipcode = document.querySelector("#zipcode");
+
+
+  const onChange = (e) =>{
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  }
+  const onSubmit = (e) => {
+    e.preventDefault();
+    update_profile(full_name, address1, address2, city, state, zipcode);
+    alert('Your profile has been updated!')
+  };
 
   function submitHandler() {
-    if (zipcode.validity.patternMismatch) {
-      zipcode.setCustomValidity(
-        "Please enter valid zipcode. Examples: 77433 or 77433-0213"
-      );
-    } else {
-      zipcode.setCustomValidity("");
+    if(!(/^\d{5}(?:[-\s]\d{4})?$/.test(zipcode))) {
+      alert('Please enter a valid zipcode. Example: 77093 or 77449-2243')
     }
   }
 
@@ -40,14 +70,17 @@ export default function Profile() {
         <h1>Complete Your Profile</h1>
         <div id="msgError"></div>
         <div className="card-body">
-          <form action="/" method="POST">
+          <form onSubmit={(e) => onSubmit(e)}>
             <div className="form-group">
               <input
                 type="text"
                 className="form-control"
                 id="full-name"
-                name="Full name"
+                name="full_name"
                 maxLength="50"
+                placeholder={`${full_name_global}`}
+                onChange={(e) => onChange(e)}
+                value={full_name}
                 required
               />
               <label htmlFor="user" id="label-fullname" className="form-label">
@@ -59,8 +92,11 @@ export default function Profile() {
                 type="text"
                 className="form-control"
                 id="addr1"
-                name="Address 1"
+                name="address1"
                 maxLength="100"
+                onChange={(e) => onChange(e)}
+                value={address1}
+                placeholder={`${address1_global}`}
                 required
               />
               <label htmlFor="addr1" id="label-addr1" className="form-label">
@@ -72,8 +108,11 @@ export default function Profile() {
                 type="text"
                 className="form-control"
                 id="addr2"
-                name="Address 2"
+                name="address2"
                 maxLength="100"
+                onChange={(e) => onChange(e)}
+                value={address2}
+                placeholder={`${address2_global}`}
               />
               <label htmlFor="addr2" id="label-addr2" className="form-label">
                 Address 2 (optional):
@@ -85,8 +124,11 @@ export default function Profile() {
                 type="text"
                 className="form-control"
                 id="city"
-                name="City"
+                name="city"
                 maxLength="100"
+                onChange={(e) => onChange(e)}
+                value={city}
+                placeholder={`${city_global}`}
                 required
               />
               <label htmlFor="city" id="label-city" className="form-label">
@@ -98,6 +140,10 @@ export default function Profile() {
               <select
                 className="form-control states"
                 id="states"
+                placeholder={`${state_global}`}
+                onChange={e => onChange(e)}
+                name="state"
+                value={state}
                 required
               ></select>
               <label className="form-label" htmlFor="states" id="label-states">
@@ -110,7 +156,10 @@ export default function Profile() {
                 pattern="^\d{5}(?:[-\s]\d{4})?$"
                 className="form-control"
                 id="zipcode"
-                name="Zipcode"
+                name="zipcode"
+                placeholder={`${zipcode_global}`}
+                onChange={(e) => onChange(e)}
+                value={zipcode}
                 required
               />
               <label
@@ -131,9 +180,20 @@ export default function Profile() {
             </div>
           </form>
         </div>
-
-        <a href="/login">Log out</a>
       </div>
     </div>
   );
-}
+};
+
+const mapStateToProps = (state) => ({
+  full_name_global: state.profile.full_name,
+  address1_global: state.profile.address1,
+  address2_global: state.profile.address2,
+  city_global: state.profile.city,
+  state_global: state.profile.state,
+  zipcode_global: state.profile.zipcode,
+});
+
+export default connect(mapStateToProps, { load_user_profile, update_profile })(
+  Profile
+);

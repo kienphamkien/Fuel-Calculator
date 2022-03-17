@@ -11,6 +11,12 @@ class UserCreateSerializer(UserCreateSerializer):
         model = User
         fields = '__all__'
 
+
+class ClientInfoSerializer(serializers.ModelSerializer):
+    # info = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+    class Meta:
+        model = ClientInformation
+        fields = '__all__'
 # class UserCreateSerializer(UserCreateSerializer):
 #     class Meta(UserCreateSerializer.Meta):
 #         model = User
