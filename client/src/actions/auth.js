@@ -12,7 +12,7 @@ import {
   LOGOUT,
 } from "./types";
 import axios from "axios";
-
+import { load_user_profile } from "./profile";
 export const checkAuthenticated = () => async (dispatch) => {
   if (localStorage.getItem("access")) {
     const config = {
@@ -96,6 +96,7 @@ export const login = (username, password) => async (dispatch) => {
       payload: res.data,
     });
     dispatch(load_user());
+    dispatch(load_user_profile())
   } catch (err) {
     dispatch({
       type: LOGIN_FAIL,

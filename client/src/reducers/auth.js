@@ -10,6 +10,8 @@ import {
   ACTIVATION_SUCCESS,
   ACTIVATION_FAIL,
   LOGOUT,
+  LOAD_USER_PROFILE_SUCCESS,
+  LOAD_USER_PROFILE_FAIL,
 } from "../actions/types";
 
 const initialState = {

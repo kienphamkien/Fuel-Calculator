@@ -15,7 +15,8 @@ const Activate = ({ verify }) => {
   };
 
   if (verified) {
-    return <Navigate to="/" />;
+    alert('Verify successfully! You can sign in your account now.')
+    return <Navigate to="/login" />;
   }
   return (
     <div className="container mt-5">

@@ -6,36 +6,20 @@ import { signup } from "../../actions/auth";
 
 const SignUp = ({ signup, isAuthenticated }) => {
   const [accountCreated, setAccountCreated] = useState(false);
+  const [validUser, setValidUser] = useState(false);
+  const [validPass, setValidPass] = useState(false);
+  const [validConfPass, setValidConfPass] = useState(false);
+
   const [formData, setFormData] = useState({
     username: "",
     email: "",
     password: "",
     re_password: "",
   });
+  
   const { username, email, password, re_password } = formData;
-  const onChange = (e) =>
+  const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-
-  const onSubmit = (e) => {
-    e.preventDefault();
-    let msgError = document.querySelector("#msgError");
-    let msgSuccess = document.querySelector("#msgSuccess");
-    if (validUser && validPass && validConfirmPass) {
-      msgSuccess.setAttribute("style", "display: block");
-      msgSuccess.innerHTML = "<strong>Signing Up User...</strong>";
-      msgError.setAttribute("style", "display: none");
-      msgError.innerHTML = "";
-    } else {
-      msgError.setAttribute("style", "display: block");
-      msgError.innerHTML =
-        "<strong>Please correctly fill out the form before signing up</strong>";
-      msgSuccess.innerHTML = "";
-      msgSuccess.setAttribute("style", "display: none");
-    }
-    if (password === re_password) {
-      signup(username, email, password, re_password);
-      setAccountCreated(true);
-    }
   };
 
   if (isAuthenticated) {
@@ -54,24 +38,20 @@ const SignUp = ({ signup, isAuthenticated }) => {
       pass.setAttribute("type", "password");
     }
   }
-  var validUser = false;
-  var validPass = false;
-  var validConfirmPass = false;
 
   function userValidation() {
     let user = document.querySelector("#user");
     let labelUser = document.querySelector("#label-user");
-
     if (user.value.length <= 4) {
       labelUser.setAttribute("style", "color: red");
-      labelUser.innerHTML = "Username *Insert at least 5 characters";
+      labelUser.innerHTML = "Username *Insert at least 5 characters:";
       user.setAttribute("style", "border-color: red");
-      validUser = false;
+      setValidUser(false);
     } else {
       labelUser.setAttribute("style", "color: green");
-      labelUser.innerHTML = "Username";
+      labelUser.innerHTML = "Username:";
       user.setAttribute("style", "border-color: green");
-      validUser = true;
+      setValidUser(true);
     }
   }
 
@@ -81,23 +61,22 @@ const SignUp = ({ signup, isAuthenticated }) => {
 
     if (pass.value.length <= 5) {
       labelPass.setAttribute("style", "color: red");
-      labelPass.innerHTML = "Password *Insert at least 6 characters";
+      labelPass.innerHTML = "Password *Insert at least 6 characters:";
       pass.setAttribute("style", "border-color: red");
-      validPass = false;
     } else {
       if (
-        validConfirmPass == true &&
+        validConfPass == true &&
         pass.value != document.querySelector("#confpass").value
       ) {
         labelPass.setAttribute("style", "color: red");
-        labelPass.innerHTML = "Password *Passwords do not match";
+        labelPass.innerHTML = "Password *Passwords do not match:";
         pass.setAttribute("style", "border-color: red");
-        validPass = false;
+        setValidPass(false);
       } else {
         labelPass.setAttribute("style", "color: green");
-        labelPass.innerHTML = "Password";
+        labelPass.innerHTML = "Password:";
         pass.setAttribute("style", "border-color: green");
-        validPass = true;
+        setValidPass(true);
       }
     }
   }
@@ -109,38 +88,46 @@ const SignUp = ({ signup, isAuthenticated }) => {
 
     if (pass.value != confirmPass.value) {
       labelConfirmPass.setAttribute("style", "color: red");
-      labelConfirmPass.innerHTML = "Confirm Password *Passwords do not match";
+      labelConfirmPass.innerHTML = "Confirm Password *Passwords do not match:";
       confirmPass.setAttribute("style", "border-color: red");
-      validConfirmPass = false;
+      setValidConfPass(false);
     } else {
       labelConfirmPass.setAttribute("style", "color: green");
-      labelConfirmPass.innerHTML = "Confirm Password";
+      labelConfirmPass.innerHTML = "Confirm Password:";
       confirmPass.setAttribute("style", "border-color: green");
-      validConfirmPass = true;
+      setValidConfPass(true);
     }
-  }
-
-  function signUp() {
-    // let msgError = document.querySelector("#msgError");
-    // let msgSuccess = document.querySelector("#msgSuccess");
-    // if (validUser && validPass && validConfirmPass) {
-    //   msgSuccess.setAttribute("style", "display: block");
-    //   msgSuccess.innerHTML = "<strong>Signing Up User...</strong>";
-    //   msgError.setAttribute("style", "display: none");
-    //   msgError.innerHTML = "";
-    // } else {
-    //   msgError.setAttribute("style", "display: block");
-    //   msgError.innerHTML =
-    //     "<strong>Please correctly fill out the form before signing up</strong>";
-    //   msgSuccess.innerHTML = "";
-    //   msgSuccess.setAttribute("style", "display: none");
-    // }
   }
   document.body.style.background =
     "linear-gradient(to right, rgba(166, 192, 254, 0.6), rgba(246, 128, 132, 0.6))";
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    let msgError = document.querySelector("#msgError");
+    let msgSuccess = document.querySelector("#msgSuccess");
+    if (validUser && validPass && validConfPass) {
+      msgSuccess.setAttribute("style", "display: block");
+      msgSuccess.innerHTML = "<strong>Sending verification email...</strong>";
+      msgError.setAttribute("style", "display: none");
+      msgError.innerHTML = "";
+      alert("Please check your email to verify your account.");
+      setTimeout(function () {
+        signup(username, email, password, re_password);
+        setAccountCreated(true);
+      }, 2000);
+    } else {
+      alert("Please correctly fill out the form before signing up")
+      msgError.setAttribute("style", "display: block");
+      msgError.innerHTML =
+        "<strong>Please correctly fill out the form before signing up</strong>";
+      msgSuccess.innerHTML = "";
+      msgSuccess.setAttribute("style", "display: none");
+    }
+  };
+
   return (
-    <div className="container mt4">
-      <div className="card">
+    <div className="container">
+      <div className="card signup">
         <h1>Sign Up Form</h1>
 
         <div id="msgError"></div>
@@ -225,9 +212,7 @@ const SignUp = ({ signup, isAuthenticated }) => {
               </label>
             </div>
             <div className="justify-center">
-              <button type="submit" onClick={signUp}>
-                Sign Up
-              </button>
+              <button type="submit">Sign Up</button>
             </div>
             <div className="justify-center">
               <hr />
