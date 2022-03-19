@@ -110,10 +110,9 @@ const SignUp = ({ signup, isAuthenticated }) => {
       msgSuccess.innerHTML = "<strong>Sending verification email...</strong>";
       msgError.setAttribute("style", "display: none");
       msgError.innerHTML = "";
-      alert("Please check your email to verify your account.");
+      // alert("Please check your email to verify your account.");
       setTimeout(function () {
-        signup(username, email, password, re_password);
-        setAccountCreated(true);
+      signup(username, email, password, re_password, setAccountCreated);
       }, 2000);
     } else {
       alert("Please correctly fill out the form before signing up")

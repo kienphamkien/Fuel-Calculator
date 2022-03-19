@@ -54,6 +54,8 @@ const App = () => {
             <Route exact path="/activate/:uid/:token" element={<Activate />} />
             <Route element={<PrivateRoute />}>
               <Route path="/profile" element={<Profile />} />
+              <Route path="/quote-form" element={<Quote />} />
+
             </Route>
           </Routes>
         </Layout>
