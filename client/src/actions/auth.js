@@ -105,7 +105,8 @@ export const login = (username, password) => async (dispatch) => {
 };
 
 export const signup =
-  (username, email, password, re_password, setAccountCreated) => async (dispatch) => {
+  (username, email, password, re_password, setAccountCreated, setSuccessMsg) =>
+  async (dispatch) => {
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -118,13 +119,17 @@ export const signup =
         body,
         config
       );
-      setAccountCreated(true);
-        dispatch({
+      setSuccessMsg(true);
+      alert('Your account has been created. Please check your email to verify the account.')
+      setTimeout(function () {
+        setAccountCreated(true);
+      }, 3000);
+      dispatch({
         type: SIGNUP_SUCCESS,
         payload: res.data,
       });
     } catch (err) {
-      alert('some shit happen')
+      alert(Object.values(err.response.data)[0]);
       dispatch({
         type: SIGNUP_FAIL,
       });

@@ -9,6 +9,7 @@ const SignUp = ({ signup, isAuthenticated }) => {
   const [validUser, setValidUser] = useState(false);
   const [validPass, setValidPass] = useState(false);
   const [validConfPass, setValidConfPass] = useState(false);
+  const [successMsg, setSuccessMsg] = useState(false);
 
   const [formData, setFormData] = useState({
     username: "",
@@ -30,6 +31,12 @@ const SignUp = ({ signup, isAuthenticated }) => {
     return <Navigate to="/login" />;
   }
 
+  if (successMsg) {
+    msgSuccess.setAttribute("style", "display: block");
+    msgSuccess.innerHTML = "<strong>Sending verification email...</strong>";
+    msgError.setAttribute("style", "display: none");
+    msgError.innerHTML = "";
+  }
   function eyeClick() {
     let pass = document.querySelector("#pass");
     if (pass.type == "password") {
@@ -106,14 +113,8 @@ const SignUp = ({ signup, isAuthenticated }) => {
     let msgError = document.querySelector("#msgError");
     let msgSuccess = document.querySelector("#msgSuccess");
     if (validUser && validPass && validConfPass) {
-      msgSuccess.setAttribute("style", "display: block");
-      msgSuccess.innerHTML = "<strong>Sending verification email...</strong>";
-      msgError.setAttribute("style", "display: none");
-      msgError.innerHTML = "";
-      // alert("Please check your email to verify your account.");
-      setTimeout(function () {
-      signup(username, email, password, re_password, setAccountCreated);
-      }, 2000);
+      signup(username, email, password, re_password, setAccountCreated, setSuccessMsg);
+
     } else {
       alert("Please correctly fill out the form before signing up")
       msgError.setAttribute("style", "display: block");
