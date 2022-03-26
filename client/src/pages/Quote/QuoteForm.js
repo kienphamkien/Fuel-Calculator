@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import DatePicker from "react-date-picker";
+import { load_user_profile, update_profile } from "../../actions/profile";
+import { connect } from "react-redux";
 
-export default function Profile() {
+const Profile = ({address1_global, city_global, state_global, zipcode_global}) => {
   const [value, onChange] = useState(new Date());
   function dateUpdate() {
     let labelDate = document.querySelector("#label-date");
@@ -13,6 +15,7 @@ export default function Profile() {
         labelDate.style.fontWeight = "normal";
     }
   }
+  const address = address1_global + ', ' + city_global + ', ' + state_global + ' ' + zipcode_global
 
   document.body.style.background =
     "linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5))";
@@ -38,11 +41,10 @@ export default function Profile() {
             </div>
             <div className="form-group">
               <input
-                type="text"
                 className="form-control"
                 id="deli-addr"
                 name="Delivery Address"
-                placeholder="30 Street St, City, State Zipcode"
+                value={address}
                 readOnly
               />
               <label
@@ -70,7 +72,6 @@ export default function Profile() {
                 className="form-control"
                 id="price"
                 name="Suggested Price"
-                placeholder="$5"
                 readOnly
               />
               <label htmlFor="price" id="label-price" className="form-label">
@@ -83,7 +84,6 @@ export default function Profile() {
                 className="form-control"
                 id="total"
                 name="Total Amount Due"
-                placeholder="$615"
                 readOnly
               />
               <label htmlFor="total" id="label-total" className="form-label">
@@ -104,8 +104,17 @@ export default function Profile() {
             </div>
           </form>
         </div>
-        <a href="/login">Go back</a>
       </div>
     </div>
   );
 }
+const mapStateToProps = (state) => ({
+  address1_global: state.profile.address1,
+  city_global: state.profile.city,
+  state_global: state.profile.state,
+  zipcode_global: state.profile.zipcode,
+});
+
+export default connect(mapStateToProps, { load_user_profile })(
+  Profile
+);

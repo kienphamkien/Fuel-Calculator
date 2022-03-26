@@ -12,8 +12,6 @@ const Profile = ({
   zipcode_global,
   update_profile,
 }) => {
-
-
   let data = statesJson["data"];
   var output = "";
   output = `<option value="" selected>Choose your state...</option>`;
@@ -21,6 +19,7 @@ const Profile = ({
     output += `
         <option value="${state.abbreviation}">${state.name}</option>`;
   });
+  const [profileText, setProfileText] = useState("Complete Your Profile");
 
   const [formData, setFormData] = useState({
     full_name: "",
@@ -35,6 +34,10 @@ const Profile = ({
 
   useEffect(() => {
     document.querySelector("#states").innerHTML = output;
+    console.log(full_name_global)
+    if (full_name_global.length != 0) {
+      setProfileText("My Profile");
+    }
     setFormData({
       full_name: full_name_global,
       address1: address1_global,
@@ -45,29 +48,27 @@ const Profile = ({
     });
   }, [full_name_global]);
 
-
-
-  const onChange = (e) =>{
+  const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-  }
+  };
   const onSubmit = (e) => {
     e.preventDefault();
     update_profile(full_name, address1, address2, city, state, zipcode);
-    alert('Your profile has been updated!')
+    alert("Your profile has been updated!");
   };
 
   function submitHandler() {
-    if(!(/^\d{5}(?:[-\s]\d{4})?$/.test(zipcode))) {
-      alert('Please enter a valid zipcode. Example: 77093 or 77449-2243')
+    if (!/^\d{5}(?:[-\s]\d{4})?$/.test(zipcode)) {
+      alert("Please enter a valid zipcode. Example: 77093 or 77449-2243");
     }
   }
 
   document.body.style.background =
     "linear-gradient(to right, rgba(172, 203, 238, 0.5), rgba(0, 231, 240, 0.5))";
   return (
-    <div className="container mt4">
+    <div className="container">
       <div className="card">
-        <h1>Complete Your Profile</h1>
+        <h1>{profileText}</h1>
         <div id="msgError"></div>
         <div className="card-body">
           <form onSubmit={(e) => onSubmit(e)}>
@@ -141,7 +142,7 @@ const Profile = ({
                 className="form-control states"
                 id="states"
                 placeholder={`${state_global}`}
-                onChange={e => onChange(e)}
+                onChange={(e) => onChange(e)}
                 name="state"
                 value={state}
                 required
@@ -175,9 +176,7 @@ const Profile = ({
                 Save
               </button>
             </div>
-            <div className="justify-center">
-              <hr />
-            </div>
+            <div className="justify-center"></div>
           </form>
         </div>
       </div>
