@@ -11,36 +11,10 @@ import { Provider } from "react-redux";
 import Layout from "./hocs/Layout";
 import Activate from "./pages/Activate";
 import PrivateRoute from "./components/PrivateRoute";
-import { connect } from "react-redux";
-
-const bootstrap = require("bootstrap");
-const table = require("bootstrap-table");
-// function App() {
-//   return (
-//       <Router>
-//         <Routes>
-//           <Route path="/login" element={<Login />} />
-//           <Route path="/signup" element={<SignUp />} />
-//           <Route path="/profile" element={<Profile />} />
-//           <Route path="/" element={<Login />} />
-//           <Route path="/quote-form" element={<Quote />} />
-//           <Route path="/quote-history" element={<History />} />
-//         </Routes>
-//       </Router>
-//   );
-// }
-
-// import { Route, Navigate } from "react-router-dom";
 // import { connect } from "react-redux";
 
-// const PrivateRoute = ({ isAuthenticated, ...props }) =>
-//   isAuthenticated ? <Route {...props} /> : <Navigate to="/login" />;
-
-// const mapStateToProps = (state) => ({
-//   isAuthenticated: state.auth.isAuthenticated,
-// });
-
-// export default connect(mapStateToProps)(PrivateRoute);
+const bootstrap = require("bootstrap");
+const bstable = require("bootstrap-table");
 
 const App = () => {
   return (
@@ -55,7 +29,7 @@ const App = () => {
             <Route element={<PrivateRoute />}>
               <Route path="/profile" element={<Profile />} />
               <Route path="/quote-form" element={<Quote />} />
-
+              <Route path="/quote-history" element={<History />} />
             </Route>
           </Routes>
         </Layout>
