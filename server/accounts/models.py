@@ -1,9 +1,7 @@
-from multiprocessing.connection import Client
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
-from django.core.validators import MinLengthValidator, MinValueValidator
+from django.core.validators import MinLengthValidator
 from django.conf import settings
-from decimal import Decimal
 
 class UserAccountManager(BaseUserManager):
     def create_user(self, email, username, password=None):
@@ -11,10 +9,8 @@ class UserAccountManager(BaseUserManager):
             raise ValueError('Users must have an email address')
         if not username:
             raise ValueError('Please enter your username')
-
         email = self.normalize_email(email)
         user = self.model(email=email, username=username)
-
         user.set_password(password)
         user.save()
         ClientInformation(user_id=user.id).save()
@@ -31,7 +27,7 @@ class UserAccount(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELDS = ['email']
 
     def __str__(self):
-        return self.username
+        return str(self.username)
 
 class ClientInformation(models.Model):
     user = models.OneToOneField(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -55,4 +51,3 @@ class FuelQuotes(models.Model):
 
     def __str__(self):
         return str(self.user)
-
