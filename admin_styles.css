@@ -28,6 +28,14 @@ h3 {
     color: #999;
 }
 
+
+.user .text {
+    background: lightseagreen;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+}
+
 .btn {
     background: #f05462;
     color: white;
@@ -187,6 +195,7 @@ td {
 }
 
 .container .content .cards .card {
+    
     width: 250px;
     height: 150px;
     background: white;
@@ -205,7 +214,7 @@ td {
     flex-wrap: wrap;
 }
 
-.container .content .content-2 .recent-payments {
+.container .content .content-2 .quote-history {
     min-height: 50vh;
     flex: 5;
     background: white;

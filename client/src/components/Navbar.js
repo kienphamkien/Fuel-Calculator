@@ -26,6 +26,16 @@ const Navbar = ({ logout, isAuthenticated }) => {
         </Link>
       </li>
       <li className="nav-item">
+        <Link className="nav-link" to="/quote-history">
+          Quote History
+        </Link>
+      </li>
+      <li className="nav-item">
+        <Link className="nav-link" to="/quote-form">
+          Get Quote
+        </Link>
+      </li>
+      <li className="nav-item">
         <a className="nav-link" href="/" onClick={logout}>
           Logout
         </a>
