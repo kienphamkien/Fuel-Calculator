@@ -32,6 +32,8 @@ const SignUp = ({ signup, isAuthenticated }) => {
   }
 
   if (successMsg) {
+    let msgError = document.querySelector("#msgError");
+    let msgSuccess = document.querySelector("#msgSuccess");
     msgSuccess.setAttribute("style", "display: block");
     msgSuccess.innerHTML = "<strong>Sending verification email...</strong>";
     msgError.setAttribute("style", "display: none");

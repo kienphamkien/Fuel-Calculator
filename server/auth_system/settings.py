@@ -94,9 +94,9 @@ WSGI_APPLICATION = 'auth_system.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'fuel',
+        'NAME': 'postgres',
         'USER': 'postgres',
-        'PASSWORD' : 'k',
+        'PASSWORD' : 'Loyalty123!',
         'HOST': 'localhost',
     }
 }
