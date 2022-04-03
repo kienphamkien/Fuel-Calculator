@@ -7,7 +7,6 @@ from django.http import JsonResponse
 
 User = get_user_model()
 
-
 class UserProfile(APIView):
     permission_classes = (IsAuthenticated,)
 

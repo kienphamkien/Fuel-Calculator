@@ -1,6 +1,6 @@
 
 from django.test import TestCase
-from accounts.models import UserAccount, ClientInformation, FuelQuotes
+from accounts.models import UserAccount, ClientInformation
 
 class TestModel(TestCase):
     def setUp(self):
