@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { login } from "../../actions/auth";
 // import style from "./Login.module.css";
 
+
 const Login = ({ login, isAuthenticated }) => {
   function eyeClick() {
     let pass = document.querySelector("#password");

@@ -12,6 +12,8 @@ import Layout from "./hocs/Layout";
 import Activate from "./pages/Activate";
 import PrivateRoute from "./components/PrivateRoute";
 // import { connect } from "react-redux";
+import FuelQuote from "./pages/FuelQuote/FuelQuote";
+import Home from "./pages/Home/Home";
 
 const bootstrap = require("bootstrap");
 const bstable = require("bootstrap-table");
@@ -22,7 +24,8 @@ const App = () => {
       <Router>
         <Layout>
           <Routes>
-            {/* <Route exact path="/" element={<Home />} /> */}
+            <Route exact path="/" element={<FuelQuote />} />
+            <Route exact path="/Home" element={<Home />} />
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/signup" element={<SignUp />} />
             <Route exact path="/activate/:uid/:token" element={<Activate />} />

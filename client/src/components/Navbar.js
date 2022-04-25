@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { logout } from "../actions/auth";
+import Home from "../pages/Home/Home";
 
 const Navbar = ({ logout, isAuthenticated }) => {
   const guestLinks = () => (
@@ -59,7 +60,7 @@ const Navbar = ({ logout, isAuthenticated }) => {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav">
             <li className="nav-item active">
-              <Link className="nav-link" to="/">
+              <Link className="nav-link" to="/Home">
                 Home <span className="sr-only">(current)</span>
               </Link>
             </li>
