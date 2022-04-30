@@ -61,7 +61,7 @@ class QuotesHistory(APIView):
 class GetPrice(APIView):
     permission_classes = (IsAuthenticated,)
 
-    def get(self, request):
+    def put(self, request):
         user = self.request.user
         user_id = user.id
         gallons = int(self.request.data['gallons'])

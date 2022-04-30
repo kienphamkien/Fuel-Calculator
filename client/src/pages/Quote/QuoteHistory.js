@@ -14,7 +14,6 @@ export default function QuoteHistory() {
         Authorization: `JWT ${localStorage.getItem("access")}`,
       },
     };
-
     axios
       .get(`${process.env.REACT_APP_API_URL}/accounts/fuelquotes`, config)
       .then((res) => {
@@ -28,6 +27,8 @@ export default function QuoteHistory() {
         console.log(err);
       });
   };
+
+  
   useEffect(() => {
     quote_history();
     DisplayData;
