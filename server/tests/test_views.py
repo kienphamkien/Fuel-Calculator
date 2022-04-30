@@ -43,3 +43,10 @@ class TestViews(APITestCase):
         body = {"gallons": "10", "delivery_address": "323 Main St", "delivery_date": "04/03/2022", "price": "2.3", "amount_due": "123.23"}
         res = self.client.post(reverse('fuelquotes'), body)        
         self.assertEqual(res.status_code, status.HTTP_200_OK)
+
+    def test_get_price(self):
+        self.test_authenticate()
+        body = {"full_name": "Kien Kien", "address1": "323 Main St", "address2": "559 Houston St", "city": "Houston", "state": "TX", "zipcode": "32415"}
+        self.client.put(reverse('profile'), body)
+        res = self.client.get(reverse('getprice'), data = {"cucu": "1500"})
+        # self.assertEqual(res.status_code, status.HTTP_200_OK)

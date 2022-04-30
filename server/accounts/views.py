@@ -61,7 +61,7 @@ class GetPrice(APIView):
     def get(self, request):
         user = self.request.user
         user_id = user.id
-        gallons = int(self.request.data['gallons'])
+        gallons = int(self.request.data['cucu'])
 
         location_factor = 0.02 if ClientInformation.objects.get(user_id=user_id).state == 'TX' else 0.04
         history_factor = 0.01 if len(FuelQuotes.objects.filter(user_id=user_id)) != 0 else 0
