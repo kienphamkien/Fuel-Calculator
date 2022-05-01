@@ -1,17 +1,4 @@
 #logo {
-    position: fixed; 
-    top: 15%; 
-    left: -50%; 
-    width: 150%; 
-    height: 150%;
-  }
-  #logo img {
-    position: absolute; 
-    top: 0; 
-    left: 0; 
-    right: 0; 
-    bottom: 0; 
-    margin: auto; 
-    min-width: 50%;
-    min-height: 50%;
-  }
+  width: 150px; 
+  height: 120px;
+} 

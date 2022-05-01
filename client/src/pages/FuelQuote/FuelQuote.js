@@ -1,11 +1,12 @@
 import React from 'react'
-
+import "./FuelQuote.css"
 
 const FuelQuote = () => {
   return (
-    <div>
+    <div id='fq'>
 
         <h1>Welcome to Fuel Quote App</h1>
+
         <br>
         </br>
         
