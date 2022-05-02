@@ -40,7 +40,7 @@ class ClientInformation(models.Model):
     address2= models.CharField(default='',max_length=100)
     city= models.CharField(default='',max_length=100)
     state= models.CharField(default='',max_length=2)
-    zipcode= models.CharField(default='',max_length=9, validators=[MinLengthValidator(4)])
+    zipcode= models.CharField(default='',max_length=10, validators=[MinLengthValidator(5)])
 
     def __str__(self):
         return str(self.user)
