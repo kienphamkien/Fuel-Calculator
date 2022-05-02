@@ -38,13 +38,17 @@ const Quote = ({
   const [currentGallons, setCurrentGallons] = useState("");
 
   const gallonsChange = (e) => {
-    if (e.target.value == "") {
+    if (address1_global == "") {
+      alert("Please complete your profile first before requesting a quote.")
+    }
+    if (e.target.value == "" || address1_global == "") {
       setQuoteButton(true);
     } else {
       setQuoteButton(false);
     }
     setGallons(e.target.value);
   };
+
   const get_quote = () => {
     setSubmitButton(false);
     setCurrentGallons(gallons);
