@@ -43,6 +43,7 @@ const Quote = ({
     }
     if (e.target.value == "" || address1_global == "") {
       setQuoteButton(true);
+      setSubmitButton(true);
     } else {
       setQuoteButton(false);
     }
