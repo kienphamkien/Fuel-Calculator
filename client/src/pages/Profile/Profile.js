@@ -34,7 +34,6 @@ const Profile = ({
 
   useEffect(() => {
     document.querySelector("#states").innerHTML = output;
-    console.log(full_name_global)
     if (full_name_global.length != 0) {
       setProfileText("My Profile");
     }
@@ -56,10 +55,8 @@ const Profile = ({
     update_profile(full_name, address1, address2, city, state, zipcode);
     setTimeout(function () {
       window.location.reload();
-    }, 1000);
+    }, 500);
     alert("Your profile has been updated!");
-    
-
   };
 
   function submitHandler() {
