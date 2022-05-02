@@ -11,6 +11,7 @@ import { Provider } from "react-redux";
 import Layout from "./hocs/Layout";
 import Activate from "./pages/Activate";
 import PrivateRoute from "./components/PrivateRoute";
+import Home from "./pages/Home/Home.js"
 // import { connect } from "react-redux";
 
 const bootstrap = require("bootstrap");
@@ -22,7 +23,7 @@ const App = () => {
       <Router>
         <Layout>
           <Routes>
-            {/* <Route exact path="/" element={<Home />} /> */}
+            <Route exact path="/" element={<Home />} />
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/signup" element={<SignUp />} />
             <Route exact path="/activate/:uid/:token" element={<Activate />} />

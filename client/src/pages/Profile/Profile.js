@@ -54,7 +54,12 @@ const Profile = ({
   const onSubmit = (e) => {
     e.preventDefault();
     update_profile(full_name, address1, address2, city, state, zipcode);
+    setTimeout(function () {
+      window.location.reload();
+    }, 1000);
     alert("Your profile has been updated!");
+    
+
   };
 
   function submitHandler() {

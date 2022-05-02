@@ -46,14 +46,13 @@ const Navbar = ({ logout, isAuthenticated }) => {
     <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <Link className="navbar-brand" to="/">
-          Fuel Quote
+          <img className= "logo" src="logo.jpg" />
         </Link>
         <button
           className="navbar-toggler"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarNav"
-          
         >
           <span className="navbar-toggler-icon"></span>
         </button>
