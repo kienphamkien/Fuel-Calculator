@@ -1,9 +1,7 @@
-from multiprocessing.connection import Client
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
-from django.core.validators import MinLengthValidator, MinValueValidator
+from django.core.validators import MinLengthValidator
 from django.conf import settings
-from decimal import Decimal
 
 class UserAccountManager(BaseUserManager):
     def create_user(self, email, username, password=None):
